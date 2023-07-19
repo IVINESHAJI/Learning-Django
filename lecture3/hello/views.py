@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+#render is for html files
+#HTTpResponse is to print wht we want
 
 # Create your views here.
 def index(request) : 
