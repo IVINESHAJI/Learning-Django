@@ -6,6 +6,6 @@ from django.shortcuts import render
 
 def index(request) :
     now = datetime.datetime.now()
-    return render(request, "newyear/indeax.html", {
+    return render(request, "newyear/index.html", { 
         "newyear" : now.month == 12 and now.day == 25
-    })
+        })
