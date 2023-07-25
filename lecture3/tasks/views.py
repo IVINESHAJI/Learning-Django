@@ -6,14 +6,15 @@ from django.shortcuts import render
 # Create your views here.
 
 
-tasks = []
-
 class NewTaskForm(forms.Form) :
     task = forms.CharField(label = "New Task")
     
 def index(request) :
+
+    if "tasks" not in request.session :
+        request.session["tasks"] = []
     return render(request ,"tasks/index.html" , {
-        "tasks" : tasks 
+        "tasks" : request.session["tasks"] 
     })
 
 def add(request) :
@@ -23,7 +24,7 @@ def add(request) :
 
         if form.is_valid() :
             task = form.cleaned_data["task"] # Access the answer submitted as tasks
-            tasks.append(task)
+            request.session["tasks"] += [task]
             return HttpResponseRedirect(reverse("tasks:index"))
 
         else : 
