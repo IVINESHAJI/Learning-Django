@@ -17,7 +17,18 @@ def index(request) :
 
 def add(request) :
 
-    if request.method == "POST" :
-        return render(request , "tasks/add.html", {
-            "form" : NewTaskForm()
-        })
+    if request.method == "POST" : 
+        form = NewTaskForm(request.POST) #request.POST has the data the user submitted
+
+        if form.is_valid() :
+            task = form.cleaned_data["tasks"] #Access the answer submitted as tasks
+            tasks.append(task)
+
+        else : 
+            return render(request , "tasks/add.html" , {
+                "form" : NewTaskForm()
+            })
+
+    return render(request , "tasks/add.html", {
+        "form" : NewTaskForm()
+    })
