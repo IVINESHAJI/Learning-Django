@@ -16,6 +16,8 @@ def index(request) :
     })
 
 def add(request) :
-    return render(request , "tasks/add.html", {
-        "form" : NewTaskForm()
-    })
+
+    if request.method == "POST" :
+        return render(request , "tasks/add.html", {
+            "form" : NewTaskForm()
+        })
